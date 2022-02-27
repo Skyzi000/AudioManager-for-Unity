@@ -1,0 +1,18 @@
+{
+    "name": "jp.skyzi.audio-manager",
+    "displayName": "AudioManager",
+    "description": "Simple AudioManager using the AudioMixer for Unity.",
+    "version": "0.1.0",
+    "unity": "2020.3",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Skyzi000/AutoManager-for-Unity.git"
+    },
+    "documentationUrl": "https://github.com/Skyzi000/AutoManager-for-Unity",
+    "licensesUrl": "https://github.com/Skyzi000/AutoManager-for-Unity/blob/main/LICENSE.md",
+    "author": {
+        "name": "Skyzi000",
+        "url": "https://github.com/Skyzi000"
+    }
+}
