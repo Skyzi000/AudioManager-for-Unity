@@ -348,6 +348,13 @@ namespace Skyzi000.AudioManager
 
         private static void StopAll(List<AudioSource> sources) => sources.ForEach(s => s.Stop());
 
+        // ReSharper disable once SuggestBaseTypeForParameter
+        private static void StopAll(List<AudioSource> sources, AudioSource ignoreSource) => sources.ForEach(s =>
+        {
+            if (s != ignoreSource)
+                s.Stop();
+        });
+
         private static void PauseAll(List<AudioSource> sources) => sources.ForEach(Pause);
 
         private static void UnPauseAll(List<AudioSource> sources) => sources.ForEach(UnPause);
@@ -395,7 +402,13 @@ namespace Skyzi000.AudioManager
                         .ThenByDescending(s => s.time)
                         .FirstOrDefault();
                     if (playSource != null)
+                    {
                         playSource.Stop();
+                    }
+                    else
+                    {
+                        playSource = audioSources[0];
+                    }
                 }
             }
             else
@@ -413,14 +426,14 @@ namespace Skyzi000.AudioManager
                     return playSource;
                 }
 
+                if (playSource == null)
+                    playSource = audioSources[0];
+
                 if (Mathf.Approximately(delay, 0f))
                     StopAll(audioSources);
                 else
-                    Instance.StartCoroutine(DelayCoroutine(delay, () => StopAll(audioSources)));
+                    Instance.StartCoroutine(DelayCoroutine(delay, () => StopAll(audioSources, playSource)));
             }
-
-            if (playSource == null)
-                playSource = audioSources[0];
 
             playSource.clip = audioClip;
             playSource.volume = volume;
