@@ -2,7 +2,7 @@
     "name": "jp.skyzi.audio-manager",
     "displayName": "AudioManager",
     "description": "Simple AudioManager using the AudioMixer for Unity.",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "unity": "2020.3",
     "license": "MIT",
     "repository": {
