@@ -63,13 +63,13 @@ namespace Skyzi000.AudioManager
         public void Pause()
         {
             // isPlayingをtrueに保つためAudioSource.Pause()は使っていない
-            if (AudioClip != null)
+            if (AudioClip != null && AudioSource != null)
                 AudioSource.pitch = 0f;
         }
 
         public void UnPause()
         {
-            if (AudioClip != null)
+            if (AudioClip != null && AudioSource != null)
                 AudioSource.pitch = pitch;
         }
 
@@ -92,8 +92,6 @@ namespace Skyzi000.AudioManager
         }
 
         private void OnDisable() => Pause();
-
-        private void OnDestroy() => Stop();
 
 #if UNITY_EDITOR
         private void OnValidate()
