@@ -12,9 +12,6 @@ using UnityEngine.Events;
 
 namespace Skyzi000.AudioManager
 {
-    /// <summary>
-    /// <see cref="AudioMixer"/>とDOTweenの力を借りて強くなった自作<see cref="AudioManager"/>からDOTweenを取り除いた。
-    /// </summary>
     public class AudioManager : SingletonMonoBehaviour<AudioManager>
     {
         [field: SerializeField]
