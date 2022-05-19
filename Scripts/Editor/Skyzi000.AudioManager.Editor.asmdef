@@ -1,0 +1,18 @@
+{
+    "name": "Skyzi000.AudioManager.Editor",
+    "rootNamespace": "Skyzi000",
+    "references": [
+        "GUID:42343bb3823f28b49b9eb597fce6ef72"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
