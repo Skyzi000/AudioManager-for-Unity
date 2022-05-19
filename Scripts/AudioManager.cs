@@ -98,10 +98,10 @@ namespace Skyzi000.AudioManager
         /// </summary>
         public bool IsPauseBGM { get; private set; } = false;
 
-        [field: SerializeField, Header("UnityEvents")]
+        [field: SerializeField, FoldoutGroup("Events")]
         public UnityEvent OnPauseBGM { get; private set; } = new UnityEvent();
 
-        [field: SerializeField]
+        [field: SerializeField, FoldoutGroup("Events")]
         public UnityEvent OnUnPauseBGM { get; private set; } = new UnityEvent();
 
         /// <summary>
@@ -109,10 +109,10 @@ namespace Skyzi000.AudioManager
         /// </summary>
         public bool IsPauseSE { get; private set; } = false;
 
-        [field: SerializeField]
+        [field: SerializeField, FoldoutGroup("Events")]
         public UnityEvent OnPauseSE { get; private set; } = new UnityEvent();
 
-        [field: SerializeField]
+        [field: SerializeField, FoldoutGroup("Events")]
         public UnityEvent OnUnPauseSE { get; private set; } = new UnityEvent();
 
         [SerializeField, Header("Maximum number that can be played at one time")]
