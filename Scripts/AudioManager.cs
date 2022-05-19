@@ -8,16 +8,82 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
 
-// ReSharper disable UnusedAutoPropertyAccessor.Local
-
 namespace Skyzi000.AudioManager
 {
-    public class AudioManager : SingletonMonoBehaviour<AudioManager>
+    public class AudioManager : MonoBehaviour
     {
         [field: SerializeField]
-        protected override bool DontDestroyOnLoadEnabled { get; set; } = true;
+        protected virtual bool DontDestroyOnLoadEnabled { get; set; } = true;
+
+        private static AudioManager _instance;
+        private bool _isInitialized;
+
+        public static AudioManager Instance
+        {
+            get
+            {
+                if (_instance != null) return _instance;
+                _instance = (AudioManager) FindObjectOfType(typeof(AudioManager));
+                if (_instance != null)
+                {
+                    _instance.InitIfNeeded();
+                }
+                else
+                {
+                    Debug.LogError($"{typeof(AudioManager)} is missing.");
+                    Debug.LogWarning($"Forcibly generates a {typeof(AudioManager)}.");
+                    var go = new GameObject(nameof(AudioManager), typeof(AudioManager));
+                    _instance = go.GetComponent(typeof(AudioManager)) as AudioManager ??
+                                throw new InvalidOperationException("AudioManager force generate fails.");
+                }
+
+                return _instance;
+            }
+        }
+
+        protected void Awake()
+        {
+            if (_instance == null)
+                _instance = this;
+            if (_instance != null)
+                _instance.InitIfNeeded();
+            if (this != Instance)
+            {
+                Destroy(this);
+                Debug.LogWarning($"Since the {typeof(AudioManager)} is already attached to another GameObject ({Instance.gameObject.name}), it destroys this component.", Instance);
+                return;
+            }
+
+            if (DontDestroyOnLoadEnabled) DontDestroyOnLoad(gameObject);
+        }
+
+        private void InitIfNeeded()
+        {
+            if (_isInitialized)
+                return;
+            _parentBGMSource = new GameObject("BGMSources");
+            _parentBGMSource.transform.SetParent(transform);
+            _parentSESource = new GameObject("SESources");
+            _parentSESource.transform.SetParent(transform);
+            for (var i = 0; i < bgmSourceNum; i++)
+            {
+                var bgmSource = _parentBGMSource.AddComponent<AudioSource>();
+                bgmSource.outputAudioMixerGroup = BGMGroup;
+                _bgmSources.Add(bgmSource);
+            }
+
+            for (var i = 0; i < seSourceNum; i++)
+            {
+                var seSource = _parentSESource.AddComponent<AudioSource>();
+                seSource.outputAudioMixerGroup = SEGroup;
+                _seSources.Add(seSource);
+            }
+
+            _isInitialized = true;
+        }
 
         [field: SerializeField, Required]
+        // ReSharper disable UnusedAutoPropertyAccessor.Local
         public AudioMixer Mixer { get; private set; }
 
         [field: SerializeField, Required]
@@ -25,6 +91,7 @@ namespace Skyzi000.AudioManager
 
         [field: SerializeField, Required]
         public AudioMixerGroup SEGroup { get; private set; }
+        // ReSharper restore UnusedAutoPropertyAccessor.Local
 
         /// <summary>
         /// BGMを全て一時停止しているか
@@ -70,29 +137,6 @@ namespace Skyzi000.AudioManager
         private GameObject _parentSESource;
         private readonly List<AudioSource> _bgmSources = new List<AudioSource>();
         private readonly List<AudioSource> _seSources = new List<AudioSource>();
-
-
-        protected override void Init()
-        {
-            _parentBGMSource = new GameObject("BGMSources");
-            _parentBGMSource.transform.SetParent(transform);
-            _parentSESource = new GameObject("SESources");
-            _parentSESource.transform.SetParent(transform);
-            for (var i = 0; i < bgmSourceNum; i++)
-            {
-                var bgmSource = _parentBGMSource.AddComponent<AudioSource>();
-                bgmSource.outputAudioMixerGroup = BGMGroup;
-                _bgmSources.Add(bgmSource);
-            }
-
-            for (var i = 0; i < seSourceNum; i++)
-            {
-                var seSource = _parentSESource.AddComponent<AudioSource>();
-                seSource.outputAudioMixerGroup = SEGroup;
-                _seSources.Add(seSource);
-            }
-        }
-
 
         #region BGM
 
