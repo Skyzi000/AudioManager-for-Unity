@@ -12,8 +12,18 @@ namespace Skyzi000.AudioManager.Editor
 
         private static readonly string AudioManagerPrefabName = nameof(AudioManager);
 
+        private static bool _isInitialized = false;
+
         [InitializeOnLoadMethod]
         private static void Initialize()
+        {
+            if (_isInitialized)
+                return;
+            EditorApplication.delayCall += DelayCall;
+            _isInitialized = true;
+        }
+
+        private static void DelayCall()
         {
             var prefab = Resources.Load<GameObject>(AudioManagerPrefabName);
             if (prefab == null)
