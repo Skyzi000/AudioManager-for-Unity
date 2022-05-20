@@ -30,10 +30,9 @@ namespace Skyzi000.AudioManager
                 }
                 else
                 {
-                    Debug.LogError($"{typeof(AudioManager)} is missing.");
-                    Debug.LogWarning($"Forcibly generates a {typeof(AudioManager)}.");
-                    var go = new GameObject(nameof(AudioManager), typeof(AudioManager));
-                    _instance = go.GetComponent(typeof(AudioManager)) as AudioManager ??
+                    Debug.LogWarning($"{typeof(AudioManager)} is missing.\nTrying to load from Resources.");
+                    GameObject go = Instantiate(Resources.Load<GameObject>(nameof(AudioManager)));
+                    _instance = go.GetComponent<AudioManager>() ??
                                 throw new InvalidOperationException("AudioManager force generate fails.");
                 }
 
