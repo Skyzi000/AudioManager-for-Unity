@@ -2,7 +2,7 @@
 
 namespace Skyzi000.AudioManager
 {
-    public class RuntimeInstantiator : MonoBehaviour
+    public static class RuntimeInstantiator
     {
         /// <summary>
         /// ゲーム開始時、自動的にオブジェクトを生成する
@@ -11,7 +11,7 @@ namespace Skyzi000.AudioManager
         private static void InstantiateObjectOnLoad()
         {
             var prefab = Resources.Load<GameObject>(nameof(AudioManager));
-            Instantiate(prefab);
+            Object.Instantiate(prefab);
         }
     }
 }
