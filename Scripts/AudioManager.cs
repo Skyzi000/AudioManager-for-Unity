@@ -84,13 +84,13 @@ namespace Skyzi000.AudioManager
 
         [field: SerializeField, Required]
         // ReSharper disable UnusedAutoPropertyAccessor.Local
-        public AudioMixer Mixer { get; private set; }
+        public AudioMixer Mixer { get; set; }
 
         [field: SerializeField, Required]
-        public AudioMixerGroup BGMGroup { get; private set; }
+        public AudioMixerGroup BGMGroup { get; set; }
 
         [field: SerializeField, Required]
-        public AudioMixerGroup SEGroup { get; private set; }
+        public AudioMixerGroup SEGroup { get; set; }
         // ReSharper restore UnusedAutoPropertyAccessor.Local
 
         /// <summary>
