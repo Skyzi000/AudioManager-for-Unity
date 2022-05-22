@@ -120,42 +120,6 @@ namespace Skyzi000.AudioManager
         [SerializeField]
         private int seSourceNum = 8;
 
-        [ShowInInspector, PropertyRange(0f, 1f)]
-        public float MasterVolume
-        {
-            get
-            {
-                if (Mixer.GetFloat(masterVolumeParameterName, out var dB))
-                    return AudioExtensions.ConvertDb2Volume(dB);
-                throw new InvalidOperationException($"{nameof(masterVolumeParameterName)}({masterVolumeParameterName}) is invalid.");
-            }
-            set => Mixer.SetFloat(masterVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
-        }
-
-        [ShowInInspector, PropertyRange(0f, 1f)]
-        public float BGMVolume
-        {
-            get
-            {
-                if (Mixer.GetFloat(bgmVolumeParameterName, out var dB))
-                    return AudioExtensions.ConvertDb2Volume(dB);
-                throw new InvalidOperationException($"{nameof(bgmVolumeParameterName)}({bgmVolumeParameterName}) is invalid.");
-            }
-            set => Mixer.SetFloat(bgmVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
-        }
-
-        [ShowInInspector, PropertyRange(0f, 1f)]
-        public float SEVolume
-        {
-            get
-            {
-                if (Mixer.GetFloat(seVolumeParameterName, out var dB))
-                    return AudioExtensions.ConvertDb2Volume(dB);
-                throw new InvalidOperationException($"{nameof(seVolumeParameterName)}({seVolumeParameterName}) is invalid.");
-            }
-            set => Mixer.SetFloat(seVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
-        }
-
         [SerializeField, FoldoutGroup("MixerParameterName")]
         private string masterVolumeParameterName = "MasterVolume";
 
@@ -176,6 +140,42 @@ namespace Skyzi000.AudioManager
 
         [ShowInInspector, ReadOnly]
         private static string _seDirectory = "SE";
+
+        [ShowInInspector, PropertyRange(0f, 1f), DisableInEditorMode]
+        public float MasterVolume
+        {
+            get
+            {
+                if (Mixer.GetFloat(masterVolumeParameterName, out var dB))
+                    return AudioExtensions.ConvertDb2Volume(dB);
+                throw new InvalidOperationException($"{nameof(masterVolumeParameterName)}({masterVolumeParameterName}) is invalid.");
+            }
+            set => Mixer.SetFloat(masterVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
+        }
+
+        [ShowInInspector, PropertyRange(0f, 1f), DisableInEditorMode]
+        public float BGMVolume
+        {
+            get
+            {
+                if (Mixer.GetFloat(bgmVolumeParameterName, out var dB))
+                    return AudioExtensions.ConvertDb2Volume(dB);
+                throw new InvalidOperationException($"{nameof(bgmVolumeParameterName)}({bgmVolumeParameterName}) is invalid.");
+            }
+            set => Mixer.SetFloat(bgmVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
+        }
+
+        [ShowInInspector, PropertyRange(0f, 1f), DisableInEditorMode]
+        public float SEVolume
+        {
+            get
+            {
+                if (Mixer.GetFloat(seVolumeParameterName, out var dB))
+                    return AudioExtensions.ConvertDb2Volume(dB);
+                throw new InvalidOperationException($"{nameof(seVolumeParameterName)}({seVolumeParameterName}) is invalid.");
+            }
+            set => Mixer.SetFloat(seVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
+        }
 
         private GameObject _parentBGMSource;
         private GameObject _parentSESource;
