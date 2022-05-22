@@ -125,8 +125,8 @@ namespace Skyzi000.AudioManager
         {
             get
             {
-                if (Mixer.GetFloat(masterVolumeParameterName, out var value))
-                    return value;
+                if (Mixer.GetFloat(masterVolumeParameterName, out var dB))
+                    return AudioExtensions.ConvertDb2Volume(dB);
                 throw new InvalidOperationException($"{nameof(masterVolumeParameterName)}({masterVolumeParameterName}) is invalid.");
             }
             set => Mixer.SetFloat(masterVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
@@ -137,8 +137,8 @@ namespace Skyzi000.AudioManager
         {
             get
             {
-                if (Mixer.GetFloat(bgmVolumeParameterName, out var value))
-                    return value;
+                if (Mixer.GetFloat(bgmVolumeParameterName, out var dB))
+                    return AudioExtensions.ConvertDb2Volume(dB);
                 throw new InvalidOperationException($"{nameof(bgmVolumeParameterName)}({bgmVolumeParameterName}) is invalid.");
             }
             set => Mixer.SetFloat(bgmVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
@@ -149,8 +149,8 @@ namespace Skyzi000.AudioManager
         {
             get
             {
-                if (Mixer.GetFloat(seVolumeParameterName, out var value))
-                    return value;
+                if (Mixer.GetFloat(seVolumeParameterName, out var dB))
+                    return AudioExtensions.ConvertDb2Volume(dB);
                 throw new InvalidOperationException($"{nameof(seVolumeParameterName)}({seVolumeParameterName}) is invalid.");
             }
             set => Mixer.SetFloat(seVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));

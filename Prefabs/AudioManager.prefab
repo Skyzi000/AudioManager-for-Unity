@@ -43,9 +43,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73244a9a307ce043b2a66c4673d50b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
+  <DontDestroyOnLoadEnabled>k__BackingField: 1
   <Mixer>k__BackingField: {fileID: 24100000, guid: 5a8640c41c06b7b4f88191e0b5721744, type: 2}
   <BGMGroup>k__BackingField: {fileID: -4582918533388139602, guid: 5a8640c41c06b7b4f88191e0b5721744, type: 2}
   <SEGroup>k__BackingField: {fileID: -8299992116689621741, guid: 5a8640c41c06b7b4f88191e0b5721744, type: 2}
-  _bgmSourceNum: 2
-  _seSourceNum: 3
+  <OnPauseBGM>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <OnUnPauseBGM>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <OnPauseSE>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <OnUnPauseSE>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  bgmSourceNum: 2
+  seSourceNum: 8
+  masterVolumeParameterName: MasterVolume
+  bgmVolumeParameterName: BGMVolume
+  seVolumeParameterName: SEVolume
