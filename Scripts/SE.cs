@@ -7,6 +7,12 @@ namespace Skyzi000.AudioManager
     /// </summary>
     public static class SE
     {
+        public static float Volume
+        {
+            get => AudioManager.Instance.SEVolume;
+            set => AudioManager.Instance.SEVolume = value;
+        }
+
         /// <inheritdoc cref="AudioManager.PlaySE(UnityEngine.AudioClip,float,float,float,bool,bool,int)"/>
         public static AudioSource Play(AudioClip audioClip, float volume = 1f, float pitch = 1f, float delay = 0f, bool loop = false, bool allowsDuplicate = true, int priority = AudioManager.SEDefaultPriority) =>
             AudioManager.Instance.PlaySE(audioClip, volume, pitch, delay, loop, allowsDuplicate, priority);

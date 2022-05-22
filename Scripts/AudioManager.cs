@@ -120,6 +120,51 @@ namespace Skyzi000.AudioManager
         [SerializeField]
         private int seSourceNum = 8;
 
+        [ShowInInspector, PropertyRange(0f, 1f)]
+        public float MasterVolume
+        {
+            get
+            {
+                if (Mixer.GetFloat(masterVolumeParameterName, out var value))
+                    return value;
+                throw new InvalidOperationException($"{nameof(masterVolumeParameterName)}({masterVolumeParameterName}) is invalid.");
+            }
+            set => Mixer.SetFloat(masterVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
+        }
+
+        [ShowInInspector, PropertyRange(0f, 1f)]
+        public float BGMVolume
+        {
+            get
+            {
+                if (Mixer.GetFloat(bgmVolumeParameterName, out var value))
+                    return value;
+                throw new InvalidOperationException($"{nameof(bgmVolumeParameterName)}({bgmVolumeParameterName}) is invalid.");
+            }
+            set => Mixer.SetFloat(bgmVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
+        }
+
+        [ShowInInspector, PropertyRange(0f, 1f)]
+        public float SEVolume
+        {
+            get
+            {
+                if (Mixer.GetFloat(seVolumeParameterName, out var value))
+                    return value;
+                throw new InvalidOperationException($"{nameof(seVolumeParameterName)}({seVolumeParameterName}) is invalid.");
+            }
+            set => Mixer.SetFloat(seVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
+        }
+
+        [SerializeField]
+        private string masterVolumeParameterName = "MasterVolume";
+
+        [SerializeField]
+        private string bgmVolumeParameterName = "BGMVolume";
+
+        [SerializeField]
+        private string seVolumeParameterName = "SEVolume";
+
         [ShowInInspector, ReadOnly, Header("Default priority of AudioSource")]
         public const int BGMDefaultPriority = 64;
 

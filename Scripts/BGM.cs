@@ -7,6 +7,12 @@ namespace Skyzi000.AudioManager
     /// </summary>
     public static class BGM
     {
+        public static float Volume
+        {
+            get => AudioManager.Instance.BGMVolume;
+            set => AudioManager.Instance.BGMVolume = value;
+        }
+
         /// <inheritdoc cref="AudioManager.PlayBGM(UnityEngine.AudioClip,float,float,float,bool,bool,int)"/>
         public static AudioSource Play(AudioClip audioClip, float volume = 1f, float pitch = 1f, float delay = 0f, bool loop = true, bool allowsDuplicate = false, int priority = AudioManager.BGMDefaultPriority) =>
             AudioManager.Instance.PlayBGM(audioClip, volume, pitch, delay, loop, allowsDuplicate, priority);

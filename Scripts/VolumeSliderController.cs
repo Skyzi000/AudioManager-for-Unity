@@ -21,10 +21,6 @@ namespace Skyzi000.AudioManager
             Master
         }
 
-        private static readonly string MasterVolume = "MasterVolume";
-        private static readonly string BGMVolume = "BGMVolume";
-        private static readonly string SEVolume = "SEVolume";
-
         private VolumeType _volumeType;
         private Slider _volumeSlider;
         private bool _isInitialized;
@@ -42,28 +38,27 @@ namespace Skyzi000.AudioManager
             if (_volumeSlider.transform.name.Contains("BGM"))
             {
                 _volumeType = VolumeType.BGM;
-                if (AudioManager.Instance.Mixer.GetFloat(BGMVolume, out var dB))
-                    _volumeSlider.value = AudioExtensions.ConvertDb2Volume(dB);
+                _volumeSlider.value = BGM.Volume;
             }
             else if (_volumeSlider.transform.name.Contains("SE"))
             {
                 _volumeType = VolumeType.SE;
-                if (AudioManager.Instance.Mixer.GetFloat(SEVolume, out var dB))
-                    _volumeSlider.value = AudioExtensions.ConvertDb2Volume(dB);
+                _volumeSlider.value = SE.Volume;
             }
             else if (_volumeSlider.transform.name.IndexOf("Voice", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 _volumeType = VolumeType.Voice;
-                Debug.LogWarning("Voiceボリュームの管理機能は未実装です。");
+                Debug.LogWarning("Voice volume control is not yet implemented.\n" +
+                                 "Voiceボリュームの管理機能は未実装です。");
             }
             else if (_volumeSlider.transform.name.IndexOf("Master", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 _volumeType = VolumeType.Master;
-                if (AudioManager.Instance.Mixer.GetFloat(MasterVolume, out var dB))
-                    _volumeSlider.value = AudioExtensions.ConvertDb2Volume(dB);
+                _volumeSlider.value = AudioManager.Instance.MasterVolume;
             }
             else
-                Debug.LogError("Sliderの名前に[BGM],[SE],[Voice],[Master](Voice, Masterの大文字小文字の区別は無し)のいずれかを含めてください。");
+                Debug.LogError("Include one of [BGM],[SE],[Voice],[Master] (Voice and Master are not case sensitive) in the Slider name.\n" +
+                               "Sliderの名前に[BGM],[SE],[Voice],[Master](Voice, Masterの大文字小文字の区別は無し)のいずれかを含めてください。");
 
             _isInitialized = true;
         }
@@ -77,19 +72,20 @@ namespace Skyzi000.AudioManager
             switch (_volumeType)
             {
                 case VolumeType.BGM:
-                    AudioManager.Instance.Mixer.SetFloat(BGMVolume, AudioExtensions.ConvertVolume2Db(volume));
+                    BGM.Volume = volume;
                     break;
                 case VolumeType.SE:
-                    AudioManager.Instance.Mixer.SetFloat(SEVolume, AudioExtensions.ConvertVolume2Db(volume));
+                    SE.Volume = volume;
                     break;
                 case VolumeType.Voice:
-                    // ここにVoice音量の設定処理を書く
+                    // TODO: ここにVoice音量の設定処理を書く
                     break;
                 case VolumeType.Master:
-                    AudioManager.Instance.Mixer.SetFloat(MasterVolume, AudioExtensions.ConvertVolume2Db(volume));
+                    AudioManager.Instance.MasterVolume = volume;
                     break;
                 default:
-                    Debug.LogError("Sliderの名前に[BGM],[SE],[Voice],[Master](Voice, Masterの大文字小文字の区別は無し)のいずれかを含めてください。");
+                    Debug.LogError("Include one of [BGM],[SE],[Voice],[Master] (Voice and Master are not case sensitive) in the Slider name.\n" +
+                                   "Sliderの名前に[BGM],[SE],[Voice],[Master](Voice, Masterの大文字小文字の区別は無し)のいずれかを含めてください。");
                     break;
             }
         }
