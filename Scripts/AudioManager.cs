@@ -156,13 +156,13 @@ namespace Skyzi000.AudioManager
             set => Mixer.SetFloat(seVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
         }
 
-        [SerializeField]
+        [SerializeField, FoldoutGroup("MixerParameterName")]
         private string masterVolumeParameterName = "MasterVolume";
 
-        [SerializeField]
+        [SerializeField, FoldoutGroup("MixerParameterName")]
         private string bgmVolumeParameterName = "BGMVolume";
 
-        [SerializeField]
+        [SerializeField, FoldoutGroup("MixerParameterName")]
         private string seVolumeParameterName = "SEVolume";
 
         [ShowInInspector, ReadOnly, Header("Default priority of AudioSource")]
