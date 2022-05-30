@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Sirenix.OdinInspector;
@@ -176,6 +177,9 @@ namespace Skyzi000.AudioManager
             }
             set => Mixer.SetFloat(seVolumeParameterName, AudioExtensions.ConvertVolume2Db(value));
         }
+
+        public ReadOnlyCollection<AudioSource> BGMSources => _bgmSources.AsReadOnly();
+        public ReadOnlyCollection<AudioSource> SESources => _seSources.AsReadOnly();
 
         private GameObject _parentBGMSource;
         private GameObject _parentSESource;
