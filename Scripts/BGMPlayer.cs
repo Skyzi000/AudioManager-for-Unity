@@ -28,29 +28,29 @@ namespace Skyzi000.AudioManager
         /// <remarks>一度も再生していなければnull</remarks>
         public AudioSource AudioSource { get; private set; }
 
-        [field: SerializeField, Header("AudioClip変更時イベント"), PropertyOrder(10)]
+        [field: SerializeField, Tooltip("AudioClip変更時イベント"), PropertyOrder(10)]
         public UnityEvent<AudioClip> OnAudioClipChanged { get; private set; } = new UnityEvent<AudioClip>();
 
 
-        [SerializeField, Header("BGM"), AssetSelector, RequiredIn(PrefabKind.InstanceInScene)]
+        [SerializeField, AssetSelector, RequiredIn(PrefabKind.InstanceInScene)]
         private AudioClip audioClip;
 
-        [SerializeField, Header("音量")]
+        [SerializeField, Tooltip("音量")]
         private float volume = 1f;
 
-        [SerializeField, Header("ピッチ(再生速度)")]
+        [SerializeField, Tooltip("ピッチ(再生速度)")]
         private float pitch = 1f;
 
-        [SerializeField, Header("遅延秒数"), Min(0f)]
+        [SerializeField, Tooltip("遅延秒数"), Min(0f), Unit(Units.Second)]
         private float delay;
 
-        [SerializeField, Header("ループ")]
+        [SerializeField, Tooltip("ループ")]
         private bool loop = true;
 
-        [SerializeField, Header("他のBGMの上に重複して再生するか(後から再生する方のオプションが優先される)")]
+        [SerializeField, Tooltip("他のBGMの上に重複して再生するか(後から再生する方のオプションが優先される)")]
         private bool allowsDuplicate;
 
-        [SerializeField, Range(0, 256), Header("優先度(0が最高、256が最低)")]
+        [SerializeField, Range(0, 256), Tooltip("優先度(0が最高、256が最低)")]
         private int priority = AudioManager.BGMDefaultPriority;
 
 
