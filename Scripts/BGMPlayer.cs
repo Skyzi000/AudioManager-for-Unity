@@ -32,7 +32,7 @@ namespace Skyzi000.AudioManager
         public UnityEvent<AudioClip> OnAudioClipChanged { get; private set; } = new UnityEvent<AudioClip>();
 
 
-        [SerializeField, Header("BGM"), AssetSelector, Required]
+        [SerializeField, Header("BGM"), AssetSelector, RequiredIn(PrefabKind.InstanceInScene)]
         private AudioClip audioClip;
 
         [SerializeField, Header("音量")]
